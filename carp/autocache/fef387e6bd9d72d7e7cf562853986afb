@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+<title>Gecko Tribe, LLC Press Releases</title>
+<link>http://www.geckotribe.com/press/releases/</link>
+<description>Press releases from Gecko Tribe, LLC</description>
+<item>
+<title>Grouper Update Improves Shopping.com Affiliate Support and More</title>
+<link>http://www.geckotribe.com/press/releases/-/23/</link>
+<pubDate>Thu, 08 Nov 2007 08:15:15 -0700</pubDate>
+<description>An update to the XML to RSS converter and website scraper Grouper Evolution improves support for generating Shopping.com affiliate feeds, fixes bugs and adds new features.</description>
+</item>
+<item>
+<title>Syndicate Podcasts, Media RSS feeds, and international feeds to your website</title>
+<link>http://www.geckotribe.com/press/releases/-/22/</link>
+<pubDate>Tue, 18 Apr 2006 15:13:06 -0600</pubDate>
+<description>An updated version of CaRP converts podcasts, Media RSS feeds, and a wider variety of international feeds to HTML and integrates them automatically and seamlessly into webpages.</description>
+</item>
+<item>
+<title>WhiteHatCrew.com Promotes Ethical Internet Marketing</title>
+<link>http://www.geckotribe.com/press/releases/-/21/</link>
+<pubDate>Tue, 10 Jan 2006 11:11:51 -0700</pubDate>
+<description>WhiteHatCrew.com is a new internet marketing website that emphasizes ethics in an area where many others cross the line.</description>
+</item>
+<item>
+<title>Grouper Evolution Brings RSS Newsfeeds to Affiliate Marketing</title>
+<link>http://www.geckotribe.com/press/releases/-/19/</link>
+<pubDate>Thu, 06 Oct 2005 17:23:07 -0600</pubDate>
+<description>A new version of Grouper Evolution generates RSS newsfeeds with affiliate links for participants in the affiliate programs of Amazon.com, Shopping.com, and AllPosters.com.</description>
+</item>
+<item>
+<title>RSS and Atom feed directory service available for websites</title>
+<link>http://www.geckotribe.com/press/releases/-/18/</link>
+<pubDate>Fri, 19 Aug 2005 15:06:33 -0600</pubDate>
+<description>Webmasters whose site users need a directory of RSS and Atom newsfeeds, but who do not wish to maintain their own directory, can use Chordata's Linkback Service to conveniently connect the Chordata directory to their sites.</description>
+</item>
+<item>
+<title>Grouper Evolution adds support for Atom 1.0 feeds</title>
+<link>http://www.geckotribe.com/press/releases/-/17/</link>
+<pubDate>Mon, 25 Jul 2005 09:20:43 -0600</pubDate>
+<description>Grouper Evolution, an RSS generator, adds conversion of the just-completed Atom 1.0 feed format to RSS to its existing capabilities for generating RSS feeds other XML formats, news searches, and web pages.</description>
+</item>
+<item>
+<title>Tetra: a new JavaScript scroller with RSS newsfeed integration</title>
+<link>http://www.geckotribe.com/press/releases/-/16/</link>
+<pubDate>Mon, 11 Jul 2005 09:02:28 -0600</pubDate>
+<description>Tetra is a new JavaScript scroller that features integration with RSS newsfeeds, and AJAX for background updating--two technologies to ensure that the scroller content is always fresh and up-to-date.</description>
+</item>
+<item>
+<title>CaRP RSS Parser updated with new features, improved installer</title>
+<link>http://www.geckotribe.com/press/releases/-/15/</link>
+<pubDate>Thu, 24 Feb 2005 09:58:10 -0700</pubDate>
+<description>A new release of CaRP gives webmasters more control of the processing and appearance of RSS feeds on their sites, and simplifies the installation process.</description>
+</item>
+<item>
+<title>Improved installers ease setup of RSS generation and display tools for websites</title>
+<link>http://www.geckotribe.com/press/releases/-/14/</link>
+<pubDate>Wed, 13 Oct 2004 12:47:47 -0600</pubDate>
+<description>New installers for CaRP and Grouper make it easy to get up and running with RSS feeds on your website.</description>
+</item>
+<item>
+<title>Jawfish newsfeed conversion service adds Atom support</title>
+<link>http://www.geckotribe.com/press/releases/-/13/</link>
+<pubDate>Mon, 27 Sep 2004 12:19:08 -0600</pubDate>
+<description>The Jawfish service, which converts RSS newsfeeds to JavaScripts, enabling them to be displayed on any website, now supports newsfeeds in Atom format.</description>
+</item>
+<item>
+<title>Convert Atom feeds and other XML to RSS with Grouper Evolution</title>
+<link>http://www.geckotribe.com/press/releases/-/12/</link>
+<pubDate>Thu, 23 Sep 2004 17:03:50 -0600</pubDate>
+<description>Grouper Evolution version 1.4 features a new XML plugin, enabling it to convert Atom newsfeeds to RSS format.</description>
+</item>
+<item>
+<title>CaRP Evolution 3.5 (RSS parser) enables complex filtering, mySQL storage</title>
+<link>http://www.geckotribe.com/press/releases/-/11/</link>
+<pubDate>Mon, 12 Jan 2004 18:01:13 -0700</pubDate>
+<description>CaRP Evolution 3.5, released today, adds features enabling websites to perform complex filtering of RSS newsfeeds, and to store RSS newsfeeds in a mySQL database.</description>
+</item>
+<item>
+<title>CaRP Evolution adds plugin support to RSS newsfeed parser</title>
+<link>http://www.geckotribe.com/press/releases/-/10/</link>
+<pubDate>Tue, 11 Nov 2003 18:20:29 -0700</pubDate>
+<description>A new version of CaRP (Caching RSS Parser), CaRP Evolution, adds support for third-party plugins to this popular tool for importing RSS newsfeeds into websites.</description>
+</item>
+<item>
+<title>Jawfish adds support for frames &amp;amp; iframes</title>
+<link>http://www.geckotribe.com/press/releases/-/9/</link>
+<pubDate>Mon, 03 Nov 2003 08:16:22 -0700</pubDate>
+<description>The Jawfish service, which enables any website to display RSS newsfeeds, has added support for displaying newsfeeds in a frame or iframe, in addition to its ability to display them using JavaScript.</description>
+</item>
+<item>
+<title>Grouper 1.2 adds support for Feedster, Daypop</title>
+<link>http://www.geckotribe.com/press/releases/-/8/</link>
+<pubDate>Thu, 23 Oct 2003 14:52:11 -0600</pubDate>
+<description>Grouper is a PHP script which converts news searches to RSS newsfeeds. In addition to supporting various news sources which do not offer RSS newsfeeds, it can now be used to query and cache results from Feedster&amp;trade; and Daypop.</description>
+</item>
+</channel>
+</rss>
