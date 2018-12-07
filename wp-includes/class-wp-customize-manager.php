@@ -447,7 +447,7 @@ final class WP_Customize_Manager {
 		}
 
 		if ( ! $message ) {
-			$message = __( 'Something went wrong.' );
+			$message = __( 'Cheatin&#8217; uh?' );
 		}
 
 		if ( $this->messenger_channel ) {
@@ -512,7 +512,7 @@ final class WP_Customize_Manager {
 				auth_redirect();
 			} else {
 				wp_die(
-					'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
+					'<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
 					'<p>' . __( 'Sorry, you are not allowed to customize this site.' ) . '</p>',
 					403
 				);
@@ -607,11 +607,8 @@ final class WP_Customize_Manager {
 	 * enabled, then a new UUID will be generated.
 	 *
 	 * @since 4.9.0
-	 * @global string $pagenow
 	 */
 	public function establish_loaded_changeset() {
-		global $pagenow;
-
 		if ( empty( $this->_changeset_uuid ) ) {
 			$changeset_uuid = null;
 
@@ -638,9 +635,7 @@ final class WP_Customize_Manager {
 			$this->_changeset_uuid = $changeset_uuid;
 		}
 
-		if ( is_admin() && 'customize.php' === $pagenow ) {
-			$this->set_changeset_lock( $this->changeset_post_id() );
-		}
+		$this->set_changeset_lock( $this->changeset_post_id() );
 	}
 
 	/**
@@ -1135,7 +1130,7 @@ final class WP_Customize_Manager {
 		if ( ! $changeset_post_id ) {
 			$this->_changeset_data = array();
 		} else {
-			if ( $this->autosaved() && is_user_logged_in() ) {
+			if ( $this->autosaved() ) {
 				$autosave_post = wp_get_post_autosave( $changeset_post_id, get_current_user_id() );
 				if ( $autosave_post ) {
 					$data = $this->get_changeset_post_data( $autosave_post->ID );
@@ -2878,12 +2873,10 @@ final class WP_Customize_Manager {
 				$post_array['edit_date'] = true; // Prevent date clearing.
 				$r = wp_update_post( wp_slash( $post_array ), true );
 
-				// Delete autosave revision for user when the changeset is updated.
-				if ( ! empty( $args['user_id'] ) ) {
-					$autosave_draft = wp_get_post_autosave( $changeset_post_id, $args['user_id'] );
-					if ( $autosave_draft ) {
-						wp_delete_post( $autosave_draft->ID, true );
-					}
+				// Delete autosave revision when the changeset is updated.
+				$autosave_draft = wp_get_post_autosave( $changeset_post_id, get_current_user_id() );
+				if ( $autosave_draft ) {
+					wp_delete_post( $autosave_draft->ID, true );
 				}
 			}
 		} else {
@@ -3170,26 +3163,15 @@ final class WP_Customize_Manager {
 	 * @return array The Heartbeat response.
 	 */
 	public function check_changeset_lock_with_heartbeat( $response, $data, $screen_id ) {
-		if ( isset( $data['changeset_uuid'] ) ) {
-			$changeset_post_id = $this->find_changeset_post_id( $data['changeset_uuid'] );
-		} else {
-			$changeset_post_id = $this->changeset_post_id();
-		}
-
-		if (
-			array_key_exists( 'check_changeset_lock', $data )
-			&& 'customize' === $screen_id
-			&& $changeset_post_id
-			&& current_user_can( get_post_type_object( 'customize_changeset' )->cap->edit_post, $changeset_post_id )
-		) {
-			$lock_user_id = wp_check_post_lock( $changeset_post_id );
+		if ( array_key_exists( 'check_changeset_lock', $data ) && 'customize' === $screen_id && current_user_can( 'customize' ) && $this->changeset_post_id() ) {
+			$lock_user_id = wp_check_post_lock( $this->changeset_post_id() );
 
 			if ( $lock_user_id ) {
 				$response['customize_changeset_lock_user'] = $this->get_lock_user_data( $lock_user_id );
 			} else {
 
 				// Refreshing time will ensure that the user is sitting on customizer and has not closed the customizer tab.
-				$this->refresh_changeset_lock( $changeset_post_id );
+				$this->refresh_changeset_lock( $this->changeset_post_id() );
 			}
 		}
 
@@ -3506,11 +3488,6 @@ final class WP_Customize_Manager {
 	 * @since 4.9.0
 	 */
 	public function handle_dismiss_autosave_or_lock_request() {
-		// Calls to dismiss_user_auto_draft_changesets() and wp_get_post_autosave() require non-zero get_current_user_id().
-		if ( ! is_user_logged_in() ) {
-			wp_send_json_error( 'unauthenticated', 401 );
-		}
-
 		if ( ! $this->is_preview() ) {
 			wp_send_json_error( 'not_preview', 400 );
 		}
@@ -3962,22 +3939,6 @@ final class WP_Customize_Manager {
 	 * @since 4.1.0
 	 */
 	public function render_control_templates() {
-		if ( $this->branching() ) {
-			$l10n = array(
-				/* translators: %s: User who is customizing the changeset in customizer. */
-				'locked' => __( '%s is already customizing this changeset. Please wait until they are done to try customizing. Your latest changes have been autosaved.' ),
-				/* translators: %s: User who is customizing the changeset in customizer. */
-				'locked_allow_override' => __( '%s is already customizing this changeset. Do you want to take over?' ),
-			);
-		} else {
-			$l10n = array(
-				/* translators: %s: User who is customizing the changeset in customizer. */
-				'locked' => __( '%s is already customizing this site. Please wait until they are done to try customizing. Your latest changes have been autosaved.' ),
-				/* translators: %s: User who is customizing the changeset in customizer. */
-				'locked_allow_override' => __( '%s is already customizing this site. Do you want to take over?' ),
-			);
-		}
-
 		foreach ( $this->registered_control_types as $control_type ) {
 			$control = new $control_type( $this, 'temp', array(
 				'settings' => array(),
@@ -4140,11 +4101,13 @@ final class WP_Customize_Manager {
 							{{{ data.message }}}
 						<# } else if ( data.allowOverride ) { #>
 							<?php
-							echo esc_html( sprintf( $l10n['locked_allow_override'], '{{ data.lockUser.name }}' ) );
+							/* translators: %s: User who is customizing the changeset in customizer. */
+							printf( __( '%s is already customizing this site. Do you want to take over?' ), '{{ data.lockUser.name }}' );
 							?>
 						<# } else { #>
 							<?php
-							echo esc_html( sprintf( $l10n['locked'], '{{ data.lockUser.name }}' ) );
+							/* translators: %s: User who is customizing the changeset in customizer. */
+							printf( __( '%s is already customizing this site. Please wait until they are done to try customizing. Your latest changes have been autosaved.' ), '{{ data.lockUser.name }}' );
 							?>
 						<# } #>
 					</p>
@@ -4592,9 +4555,7 @@ final class WP_Customize_Manager {
 		$changeset_post_id = $this->changeset_post_id();
 		if ( ! $this->saved_starter_content_changeset && ! $this->autosaved() ) {
 			if ( $changeset_post_id ) {
-				if ( is_user_logged_in() ) {
-					$autosave_revision_post = wp_get_post_autosave( $changeset_post_id, get_current_user_id() );
-				}
+				$autosave_revision_post = wp_get_post_autosave( $changeset_post_id, get_current_user_id() );
 			} else {
 				$autosave_autodraft_posts = $this->get_changeset_posts( array(
 					'posts_per_page' => 1,
@@ -4675,9 +4636,8 @@ final class WP_Customize_Manager {
 				'previewFrameSensitivity' => 2000,
 			),
 			'theme'    => array(
-				'stylesheet'  => $this->get_stylesheet(),
-				'active'      => $this->is_theme_active(),
-				'_canInstall' => current_user_can( 'install_themes' ),
+				'stylesheet' => $this->get_stylesheet(),
+				'active'     => $this->is_theme_active(),
 			),
 			'url'      => array(
 				'preview'       => esc_url_raw( $this->get_preview_url() ),
